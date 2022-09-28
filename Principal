@@ -1,0 +1,324 @@
+local GameLoaded = false
+local Player = game.Players.LocalPlayer
+local GuiShowing = true
+local EspFruitCB = false
+
+repeat
+	GameLoaded = false
+until game:IsLoaded()
+GameLoaded = true
+
+-- Principal Gui
+
+local KKMarketGui = Instance.new("ScreenGui")
+KKMarketGui.Name = "KKMarketMenu"
+KKMarketGui.Parent = Player.PlayerGui
+
+-- Floating Gui
+
+local FloatingGui = Instance.new("ScreenGui")
+FloatingGui.Name = "FloatingGui"
+FloatingGui.Parent = Player.PlayerGui
+
+-- Floating Icon
+
+local KKIcon = Instance.new("ImageButton")
+KKIcon.Name = "KKIcon"
+KKIcon.BackgroundTransparency = 1
+KKIcon.Image = "rbxassetid://11106035247"
+KKIcon.Position = UDim2.new(0.091, 0,0.136, 0)
+KKIcon.Size = UDim2.new(0.065, 0,0.106, 0)
+KKIcon.Parent = FloatingGui
+
+-- Principal Menu
+
+local KKMarketMenu = Instance.new("Frame")
+KKMarketMenu.Name = "KKMarketMenu"
+KKMarketMenu.BackgroundColor3 = Color3.fromRGB(19, 18, 25)
+KKMarketMenu.Position = UDim2.new(0.313, 0,0.324, 0)
+KKMarketMenu.Size = UDim2.new(0.374, 0,0.351, 0)
+KKMarketMenu.Parent = KKMarketGui
+
+local UiCornerMenu = Instance.new("UICorner")
+UiCornerMenu.CornerRadius = UDim.new(0.06,0)
+UiCornerMenu.Parent = KKMarketMenu
+
+-- Line For Principal Menu
+
+local MenuLine = Instance.new("Frame")
+MenuLine.Name = "Line"
+MenuLine.BorderSizePixel = 0
+MenuLine.Position = UDim2.new(0.035, 0,0.152, 0)
+MenuLine.Size = UDim2.new(0.93, 0,0.007, 0)
+MenuLine.Parent = KKMarketMenu
+
+-- Scrolling Frame For Main Setups
+
+local MainSetups = Instance.new("ScrollingFrame")
+MainSetups.Name = "MainSetups"
+MainSetups.Transparency = 1
+MainSetups.ScrollBarThickness = 6
+MainSetups.BorderSizePixel = 0
+MainSetups.Position = UDim2.new(0.032, 0,0.232, 0)
+MainSetups.Size = UDim2.new(0.264, 0,0.69, 0)
+MainSetups.Parent = KKMarketMenu
+
+local GridLayoutMainSetups = Instance.new("UIGridLayout")
+GridLayoutMainSetups.CellPadding = UDim2.new(0,0,0.01,0)
+GridLayoutMainSetups.CellSize = UDim2.new(0.9, 0,0.05, 0)
+GridLayoutMainSetups.Parent = MainSetups
+
+-- Text in the principal frame
+
+local TextMenu = Instance.new("TextLabel")
+TextMenu.Name = "TextMenu"
+TextMenu.BackgroundTransparency = 1
+TextMenu.Position = UDim2.new(0.034, 0,0.056, 0)
+TextMenu.Size = UDim2.new(0.371, 0,0.096, 0)
+TextMenu.Font = Enum.Font.Oswald
+TextMenu.FontFace.Bold = true
+TextMenu.Text = "KK Market HUB"
+TextMenu.TextColor3 = Color3.new(1, 1, 1)
+TextMenu.TextScaled = true
+TextMenu.TextXAlignment = Enum.TextXAlignment.Left
+TextMenu.Parent = KKMarketMenu
+
+-- Main Setup Esp Fruit
+
+local MainSetupEspFruit = Instance.new("TextButton")
+MainSetupEspFruit.Name = "MainSetupEspFruit"
+MainSetupEspFruit.BackgroundColor3 = Color3.fromRGB(12, 12, 17)
+MainSetupEspFruit.Font = Enum.Font.Oswald
+MainSetupEspFruit.FontFace.Style = Enum.FontStyle.Italic
+MainSetupEspFruit.TextScaled = true
+MainSetupEspFruit.TextColor3 = Color3.new(1, 1, 1)
+MainSetupEspFruit.Text = "Esp Fruit"
+MainSetupEspFruit.Parent = MainSetups
+
+local UiCornerEspFruit = Instance.new("UICorner")
+UiCornerEspFruit.CornerRadius = UDim.new(0.5,0)
+UiCornerEspFruit.Parent = MainSetupEspFruit
+
+local UiStrokeEspFruit = Instance.new("UIStroke")
+UiStrokeEspFruit.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+UiStrokeEspFruit.Color = Color3.new(1,1,1)
+UiStrokeEspFruit.Parent = MainSetupEspFruit
+
+-- Velocity Control Button
+
+local MainSetupVelocityControl = Instance.new("TextButton")
+MainSetupVelocityControl.Name = "VelocityControl"
+MainSetupVelocityControl.BackgroundColor3 = Color3.fromRGB(12, 12, 17)
+MainSetupVelocityControl.Font = Enum.Font.Oswald
+MainSetupVelocityControl.FontFace.Style = Enum.FontStyle.Italic
+MainSetupVelocityControl.TextScaled = true
+MainSetupVelocityControl.TextColor3 = Color3.new(1, 1, 1)
+MainSetupVelocityControl.Text = "Velocity Control"
+MainSetupVelocityControl.Parent = MainSetups
+
+local UiCornerVelocityControl = Instance.new("UICorner")
+UiCornerVelocityControl.CornerRadius = UDim.new(0.5,0)
+UiCornerVelocityControl.Parent = MainSetupVelocityControl
+
+local UiStrokeVelocityControl = Instance.new("UIStroke")
+UiStrokeVelocityControl.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+UiStrokeVelocityControl.Color = Color3.new(1,1,1)
+UiStrokeVelocityControl.Parent = MainSetupVelocityControl
+
+-- Setup Velocity Control
+
+local SetupVelocityControl = Instance.new("ScrollingFrame")
+SetupVelocityControl.Name = "SetupVelocityControl"
+SetupVelocityControl.Transparency = 1
+SetupVelocityControl.ScrollBarThickness = 6
+SetupVelocityControl.BorderSizePixel = 0
+SetupVelocityControl.Position = UDim2.new(0.31, 0,0.232, 0)
+SetupVelocityControl.Size = UDim2.new(0.655, 0,0.69, 0)
+SetupVelocityControl.Parent = KKMarketMenu
+
+-- Exec Velocity
+
+local SetupExecVelocity = Instance.new("TextButton")
+SetupExecVelocity.Name = "SetupExecVelocity"
+SetupExecVelocity.BackgroundColor3 = Color3.fromRGB(57, 255, 113)
+SetupExecVelocity.Font = Enum.Font.Oswald
+SetupExecVelocity.FontFace.Bold = true
+SetupExecVelocity.TextScaled = true
+SetupExecVelocity.TextColor3 = Color3.new(0, 0, 0)
+SetupExecVelocity.Text = "Exec"
+SetupExecVelocity.Position = UDim2.new(0.841, 0,0.025, 0)
+SetupExecVelocity.Size = UDim2.new(0.099, 0,0.057, 0)
+SetupExecVelocity.Parent = SetupVelocityControl
+
+local UiCornerExecVelocity = Instance.new("UICorner")
+UiCornerExecVelocity.CornerRadius = UDim.new(0.5,0)
+UiCornerExecVelocity.Parent = SetupExecVelocity
+
+-- Velocity Text
+
+local VelocityText = Instance.new("TextLabel")
+VelocityText.Name = "VelocityText"
+VelocityText.BackgroundTransparency = 1
+VelocityText.Position = UDim2.new(0.019, 0,0, 0)
+VelocityText.Size = UDim2.new(0.371, 0,0.032, 0)
+VelocityText.Font = Enum.Font.Oswald
+VelocityText.FontFace.Bold = true
+VelocityText.Text = "Set Velocity:"
+VelocityText.TextColor3 = Color3.new(1, 1, 1)
+VelocityText.TextScaled = true
+VelocityText.TextXAlignment = Enum.TextXAlignment.Left
+VelocityText.Parent = SetupVelocityControl
+
+-- Velocity Text Box
+
+local VelocityTextBox = Instance.new("TextBox")
+VelocityTextBox.Name = "VelocityTextBox"
+VelocityTextBox.BackgroundColor3 = Color3.fromRGB(12, 12, 17)
+VelocityTextBox.ClearTextOnFocus = false
+VelocityTextBox.Position = UDim2.new(0, 0,0.025, 0)
+VelocityTextBox.Size = UDim2.new(0.8, 0,0.057, 0)
+VelocityTextBox.Font = Enum.Font.SourceSansLight
+VelocityTextBox.FontFace.Bold = true
+VelocityTextBox.Text = "20"
+VelocityTextBox.TextColor3 = Color3.new(1, 1, 1)
+VelocityTextBox.TextScaled = true
+VelocityTextBox.Parent = SetupVelocityControl
+
+local UiCornerTextBoxV = Instance.new("UICorner")
+UiCornerTextBoxV.CornerRadius = UDim.new(0.5,0)
+UiCornerTextBoxV.Parent = VelocityTextBox
+
+-- Setup Esp Fruit
+
+local SetupEspFruit = Instance.new("ScrollingFrame")
+SetupEspFruit.Name = "SetupEspFruit"
+SetupEspFruit.Transparency = 1
+SetupEspFruit.ScrollBarThickness = 6
+SetupEspFruit.BorderSizePixel = 0
+SetupEspFruit.Position = UDim2.new(0.31, 0,0.232, 0)
+SetupEspFruit.Size = UDim2.new(0.655, 0,0.69, 0)
+SetupEspFruit.Visible = false
+SetupEspFruit.Parent = KKMarketMenu
+
+-- Esp Fruit Check Box:
+
+local EspFruitsCheckBox = Instance.new("TextButton")
+EspFruitsCheckBox.Name = "EspFruitsCheckBox"
+EspFruitsCheckBox.BackgroundColor3 = Color3.fromRGB(12, 12, 17)
+EspFruitsCheckBox.Font = Enum.Font.Oswald
+EspFruitsCheckBox.FontFace.Bold = true
+EspFruitsCheckBox.TextScaled = true
+EspFruitsCheckBox.TextColor3 = Color3.new(1, 1, 1)
+EspFruitsCheckBox.Text = ""
+EspFruitsCheckBox.Position = UDim2.new(0.321, 0,0.02, 0)
+EspFruitsCheckBox.Size = UDim2.new(0.099, 0,0.057, 0)
+EspFruitsCheckBox.Parent = SetupEspFruit
+
+local UiStrokeEspFruitsCB = Instance.new("UIStroke")
+UiStrokeEspFruitsCB.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+UiStrokeEspFruitsCB.Color = Color3.new(0, 0, 0)
+UiStrokeEspFruitsCB.Thickness = 3
+UiStrokeEspFruitsCB.Parent = EspFruitsCheckBox
+
+-- Esp Fruits Text:
+
+local EspFruitsText = Instance.new("TextLabel")
+EspFruitsText.Name = "VelocityText"
+EspFruitsText.BackgroundTransparency = 1
+EspFruitsText.Position = UDim2.new(0.038, 0,0.017, 0)
+EspFruitsText.Size = UDim2.new(0.5, 0,0.06, 0)
+EspFruitsText.Font = Enum.Font.Oswald
+EspFruitsText.FontFace.Bold = true
+EspFruitsText.Text = "Esp Fruits:"
+EspFruitsText.TextColor3 = Color3.new(1, 1, 1)
+EspFruitsText.TextScaled = true
+EspFruitsText.TextXAlignment = Enum.TextXAlignment.Left
+EspFruitsText.Parent = SetupEspFruit
+
+------------------------------------------------ SCRIPT PART -----------------------------------------------------------------------------------
+
+-- Set Setup:
+
+local function SetSetup(ActuallySetup)
+	local Setups = {
+		"SetupVelocityControl","SetupEspFruit"
+	}
+	local GetSetups = KKMarketMenu:GetChildren()
+	
+	for i, v in pairs(GetSetups) do
+		if table.find(Setups,v.Name) then
+			if v.Name ~= ActuallySetup then
+				v.Visible = false
+			else
+				v.Visible = true
+			end
+		end
+	end
+end
+
+-- KK Icon:
+
+KKIcon.MouseButton1Click:Connect(function()
+	if GuiShowing == false then
+		GuiShowing = true
+		KKMarketGui.Enabled = true
+	elseif GuiShowing == true then
+		GuiShowing = false
+		KKMarketGui.Enabled = false
+	end
+end)
+
+-- Velocity Execute:
+
+SetupExecVelocity.MouseButton1Click:Connect(function()
+	local VSDAAAA = VelocityTextBox.Text
+	Player.Character.Humanoid.WalkSpeed = VSDAAAA
+end)
+
+-- Esp Fruits Active
+
+EspFruitsCheckBox.MouseButton1Click:Connect(function()
+	if EspFruitCB == false then
+		EspFruitCB = true
+		
+		local GetAllGameThings = game:GetDescendants()
+		
+		for i, v in pairs(GetAllGameThings) do
+			if v:IsA("Tool") then
+				if v.Parent:FindFirstChildOfClass("Humanoid") then
+					-- Nothing
+				else
+					local BillboardGui = Instance.new("BillboardGui")
+					BillboardGui.AlwaysOnTop = true
+					BillboardGui.Size = UDim2.new(1,40,1,20)
+					BillboardGui.StudsOffsetWorldSpace = Vector3.new(0,0,5)
+					BillboardGui.Parent = v:FindFirstChild("Handle")
+					
+					local BiilboardGuiText = Instance.new("TextLabel")
+					BiilboardGuiText.Name = "BiilboardGuiText"
+					BiilboardGuiText.BackgroundTransparency = 1
+					BiilboardGuiText.Size = UDim2.new(1, 0,1, 0)
+					BiilboardGuiText.Font = Enum.Font.DenkOne
+					BiilboardGuiText.FontFace.Bold = true
+					BiilboardGuiText.Text = v.Name.. "Fruit 100m away"
+					BiilboardGuiText.TextColor3 = Color3.new(1, 1, 1)
+					BiilboardGuiText.TextScaled = true
+					BiilboardGuiText.TextXAlignment = Enum.TextXAlignment.Center
+					BiilboardGuiText.Parent = BillboardGui
+				end
+			end
+		end
+	else
+		EspFruitCB = false
+	end
+end)
+
+-- Setups Control
+
+MainSetupVelocityControl.MouseButton1Click:Connect(function()
+	SetSetup("SetupVelocityControl")
+end)
+
+MainSetupEspFruit.MouseButton1Click:Connect(function()
+	SetSetup("SetupEspFruit")
+end)
