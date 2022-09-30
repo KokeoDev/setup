@@ -2,6 +2,8 @@ local GameLoaded = false
 local Player = game.Players.LocalPlayer
 local GuiShowing = true
 local EspFruitCB = false
+local Locations = {Castle = Vector3.new(-5110.251953125, 314.5412902832031, -2966.174560546875)}
+
 
 repeat
 	GameLoaded = false
@@ -364,6 +366,17 @@ SetupExecVelocity.MouseButton1Click:Connect(function()
 	Player.Character:FindFirstChildOfClass("Humanoid").WalkSpeed = VSDAAAA
 end)
 
+--  Teleport To:
+
+local function TpLocationOfMap(LocationForTp)	
+	local BodyPosition = Instance.new("BodyPosition")
+	BodyPosition.P = 10000
+	BodyPosition.MaxForce = Vector3.new(math.huge,math.huge,math.huge)
+	BodyPosition.Position = LocationForTp
+	
+	BodyPosition.Parent = Player.Character.HumanoidRootPart
+end
+
 -- Esp Fruits Active
 
 local function ControlTextMettersAway(Gui,FruitName, FruitToFollow,PRI)
@@ -435,4 +448,10 @@ end)
 
 MainSetupEspFruit.MouseButton1Click:Connect(function()
 	SetSetup("SetupEspFruit")
+end)
+
+-- Teleports Control
+
+TpCastle.MouseButton1Click:Connect(function()
+	TpLocationOfMap(Locations.Castle)
 end)
