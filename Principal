@@ -243,6 +243,26 @@ UiStrokeEspFruitsCB.Color = Color3.new(0, 0, 0)
 UiStrokeEspFruitsCB.Thickness = 3
 UiStrokeEspFruitsCB.Parent = EspFruitsCheckBox
 
+-- Tp Nearest Fruit:
+
+local TpNearestFruit = Instance.new("TextButton")
+TpNearestFruit.Name = "TpNearestFruit"
+TpNearestFruit.BackgroundColor3 = Color3.fromRGB(12, 12, 17)
+TpNearestFruit.Font = Enum.Font.Jura
+TpNearestFruit.FontFace.Bold = true
+TpNearestFruit.TextScaled = true
+TpNearestFruit.TextColor3 = Color3.new(1, 1, 1)
+TpNearestFruit.Text = "TP To Nearest Fruit"
+TpNearestFruit.Position = UDim2.new(0.047, 0,0.189, 0)
+TpNearestFruit.Size = UDim2.new(0.8, 0,0.057, 0)
+TpNearestFruit.Parent = SetupEspFruit
+
+local UiStrokeTpTurtle = Instance.new("UIStroke")
+UiStrokeTpTurtle.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+UiStrokeTpTurtle.Color = Color3.new(0, 0, 0)
+UiStrokeTpTurtle.Thickness = 3
+UiStrokeTpTurtle.Parent = TpNearestFruit
+
 -- Esp Fruits Text:
 
 local EspFruitsText = Instance.new("TextLabel")
@@ -368,13 +388,8 @@ end)
 
 --  Teleport To:
 
-local function TpLocationOfMap(LocationForTp)	
-	local BodyPosition = Instance.new("BodyPosition")
-	BodyPosition.P = 10000
-	BodyPosition.MaxForce = Vector3.new(math.huge,math.huge,math.huge)
-	BodyPosition.Position = LocationForTp
-	
-	BodyPosition.Parent = Player.Character.HumanoidRootPart
+local function TpLocationOfMap(LocationForTp)
+	Player.Character:MoveTo(LocationForTp)
 end
 
 -- Esp Fruits Active
@@ -425,6 +440,12 @@ EspFruitsCheckBox.MouseButton1Click:Connect(function()
 						BillboardGuiText.TextXAlignment = Enum.TextXAlignment.Center
 						BillboardGuiText.Parent = BillboardGui
 						
+						local UiStrokeGui = Instance.new("UIStroke")
+						UiStrokeGui.ApplyStrokeMode = Enum.ApplyStrokeMode.Contextual
+						UiStrokeGui.Color = Color3.new(0, 0, 0)
+						UiStrokeGui.Thickness = 3
+						UiStrokeGui.Parent = BillboardGuiText
+						
 						ControlTextMettersAway(BillboardGuiText, v.Name, v:FindFirstChild("Handle"),BillboardGui)
 					end
 				end
@@ -452,6 +473,24 @@ end)
 
 -- Teleports Control
 
+TpNearestFruit.MouseButton1Click:Connect(function()
+	local GetAllGameThings = game:GetDescendants()
+
+	for i, v in pairs(GetAllGameThings) do
+		if v:IsA("Tool") then
+			if v.Parent:FindFirstChildOfClass("Humanoid") then
+				-- Nothing
+			else
+				if v.Name == "Banana" or v.Name == "Apple" or v.Name == "Pineapple" then
+					-- Nothing
+				else
+					TpLocationOfMap(v.Handle.Position)
+				end
+			end
+		end
+	end
+end)
+
 TpCastle.MouseButton1Click:Connect(function()
-	TpLocationOfMap(Locations.Castle)
+	TpLocationOfMap(Vector3.new(-5110.251953125, 314.5412902832031, -2966.174560546875))
 end)
