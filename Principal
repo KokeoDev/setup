@@ -104,6 +104,27 @@ UiStrokeEspFruit.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
 UiStrokeEspFruit.Color = Color3.new(1,1,1)
 UiStrokeEspFruit.Parent = MainSetupEspFruit
 
+-- Main Setup Teleport
+
+local MainSetupTeleport = Instance.new("TextButton")
+MainSetupTeleport.Name = "MainSetupTeleport"
+MainSetupTeleport.BackgroundColor3 = Color3.fromRGB(12, 12, 17)
+MainSetupTeleport.Font = Enum.Font.Oswald
+MainSetupTeleport.FontFace.Style = Enum.FontStyle.Italic
+MainSetupTeleport.TextScaled = true
+MainSetupTeleport.TextColor3 = Color3.new(1, 1, 1)
+MainSetupTeleport.Text = "Teleport"
+MainSetupTeleport.Parent = MainSetups
+
+local UiCornerTeleport = Instance.new("UICorner")
+UiCornerTeleport.CornerRadius = UDim.new(0.5,0)
+UiCornerTeleport.Parent = MainSetupTeleport
+
+local UiStrokeTeleport = Instance.new("UIStroke")
+UiStrokeTeleport.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+UiStrokeTeleport.Color = Color3.new(1,1,1)
+UiStrokeTeleport.Parent = MainSetupTeleport
+
 -- Velocity Control Button
 
 local MainSetupVelocityControl = Instance.new("TextButton")
@@ -235,13 +256,81 @@ EspFruitsText.TextScaled = true
 EspFruitsText.TextXAlignment = Enum.TextXAlignment.Left
 EspFruitsText.Parent = SetupEspFruit
 
+-- Setup Teleport
+
+local SetupTeleport = Instance.new("ScrollingFrame")
+SetupTeleport.Name = "SetupTeleport"
+SetupTeleport.Transparency = 1
+SetupTeleport.ScrollBarThickness = 6
+SetupTeleport.BorderSizePixel = 0
+SetupTeleport.Position = UDim2.new(0.31, 0,0.232, 0)
+SetupTeleport.Size = UDim2.new(0.655, 0,0.69, 0)
+SetupTeleport.Visible = false
+SetupTeleport.Parent = KKMarketMenu
+
+-- Tp Text
+
+local TpText = Instance.new("TextLabel")
+TpText.Name = "TpText"
+TpText.BackgroundTransparency = 1
+TpText.Position = UDim2.new(0.196, 0,0.017, 0)
+TpText.Size = UDim2.new(0.5, 0,0.06, 0)
+TpText.Font = Enum.Font.Oswald
+TpText.FontFace.Bold = true
+TpText.Text = "Teleport To"
+TpText.TextColor3 = Color3.new(1, 1, 1)
+TpText.TextScaled = true
+TpText.TextXAlignment = Enum.TextXAlignment.Center
+TpText.Parent = SetupTeleport
+
+-- Teleport To Castle
+
+local TpCastle = Instance.new("TextButton")
+TpCastle.Name = "TpCastle"
+TpCastle.BackgroundColor3 = Color3.fromRGB(12, 12, 17)
+TpCastle.Font = Enum.Font.Oswald
+TpCastle.FontFace.Bold = true
+TpCastle.TextScaled = true
+TpCastle.TextColor3 = Color3.new(1, 1, 1)
+TpCastle.Text = "Castle on the sea"
+TpCastle.Position = UDim2.new(0.047, 0,0.105, 0)
+TpCastle.Size = UDim2.new(0.8, 0,0.057, 0)
+TpCastle.Parent = SetupTeleport
+
+local UiStrokeTpCastle = Instance.new("UIStroke")
+UiStrokeTpCastle.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+UiStrokeTpCastle.Color = Color3.new(0, 0, 0)
+UiStrokeTpCastle.Thickness = 3
+UiStrokeTpCastle.Parent = TpCastle
+
+-- Teleport To Turtle
+
+local TpTurtle = Instance.new("TextButton")
+TpTurtle.Name = "TpCastle"
+TpTurtle.BackgroundColor3 = Color3.fromRGB(12, 12, 17)
+TpTurtle.Font = Enum.Font.Oswald
+TpTurtle.FontFace.Bold = true
+TpTurtle.TextScaled = true
+TpTurtle.TextColor3 = Color3.new(1, 1, 1)
+TpTurtle.Text = "Floating Turtle"
+TpTurtle.Position = UDim2.new(0.047, 0,0.189, 0)
+TpTurtle.Size = UDim2.new(0.8, 0,0.057, 0)
+TpTurtle.Parent = SetupTeleport
+
+local UiStrokeTpTurtle = Instance.new("UIStroke")
+UiStrokeTpTurtle.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+UiStrokeTpTurtle.Color = Color3.new(0, 0, 0)
+UiStrokeTpTurtle.Thickness = 3
+UiStrokeTpTurtle.Parent = TpTurtle
+
+
 ------------------------------------------------ SCRIPT PART -----------------------------------------------------------------------------------
 
 -- Set Setup:
 
 local function SetSetup(ActuallySetup)
 	local Setups = {
-		"SetupVelocityControl","SetupEspFruit"
+		"SetupVelocityControl","SetupEspFruit","SetupTeleport"
 	}
 	local GetSetups = KKMarketMenu:GetChildren()
 	
@@ -272,10 +361,22 @@ end)
 
 SetupExecVelocity.MouseButton1Click:Connect(function()
 	local VSDAAAA = VelocityTextBox.Text
-	Player.Character.Humanoid.WalkSpeed = VSDAAAA
+	Player.Character:FindFirstChildOfClass("Humanoid").WalkSpeed = VSDAAAA
 end)
 
 -- Esp Fruits Active
+
+local function ControlTextMettersAway(Gui,FruitName, FruitToFollow,PRI)
+	spawn(function()
+		repeat
+			wait()
+			local CountAboutMetters = math.floor((Player.Character.HumanoidRootPart.Position - FruitToFollow.Position).Magnitude)
+			Gui.Text = FruitName.. " Fruit ".. CountAboutMetters.. "m away"
+		until EspFruitCB == false
+		
+		PRI:Destroy()
+	end)
+end
 
 EspFruitsCheckBox.MouseButton1Click:Connect(function()
 	if EspFruitCB == false then
@@ -288,32 +389,45 @@ EspFruitsCheckBox.MouseButton1Click:Connect(function()
 				if v.Parent:FindFirstChildOfClass("Humanoid") then
 					-- Nothing
 				else
-					local BillboardGui = Instance.new("BillboardGui")
-					BillboardGui.AlwaysOnTop = true
-					BillboardGui.Size = UDim2.new(1,40,1,20)
-					BillboardGui.StudsOffsetWorldSpace = Vector3.new(0,0,5)
-					BillboardGui.Parent = v:FindFirstChild("Handle")
-					
-					local BiilboardGuiText = Instance.new("TextLabel")
-					BiilboardGuiText.Name = "BiilboardGuiText"
-					BiilboardGuiText.BackgroundTransparency = 1
-					BiilboardGuiText.Size = UDim2.new(1, 0,1, 0)
-					BiilboardGuiText.Font = Enum.Font.DenkOne
-					BiilboardGuiText.FontFace.Bold = true
-					BiilboardGuiText.Text = v.Name.. "Fruit 100m away"
-					BiilboardGuiText.TextColor3 = Color3.new(1, 1, 1)
-					BiilboardGuiText.TextScaled = true
-					BiilboardGuiText.TextXAlignment = Enum.TextXAlignment.Center
-					BiilboardGuiText.Parent = BillboardGui
+					if v.Name == "Banana" or v.Name == "Apple" or v.Name == "Pineapple" then
+						-- Nothing
+					else
+						EspFruitsCheckBox.Text = "X"
+
+						local BillboardGui = Instance.new("BillboardGui")
+						BillboardGui.AlwaysOnTop = true
+						BillboardGui.Size = UDim2.new(0,200,0,100)
+						BillboardGui.StudsOffsetWorldSpace = Vector3.new(0,0,5)
+						BillboardGui.Parent = v:FindFirstChild("Handle")
+
+						local BillboardGuiText = Instance.new("TextLabel")
+						BillboardGuiText.Name = "BillboardGuiText"
+						BillboardGuiText.BackgroundTransparency = 1
+						BillboardGuiText.Size = UDim2.new(1, 0,1, 0)
+						BillboardGuiText.Font = Enum.Font.DenkOne
+						BillboardGuiText.FontFace.Bold = true
+						BillboardGuiText.Text = v.Name.. " Fruit 100m away"
+						BillboardGuiText.TextColor3 = Color3.new(1, 1, 1)
+						BillboardGuiText.TextScaled = true
+						BillboardGuiText.TextXAlignment = Enum.TextXAlignment.Center
+						BillboardGuiText.Parent = BillboardGui
+						
+						ControlTextMettersAway(BillboardGuiText, v.Name, v:FindFirstChild("Handle"),BillboardGui)
+					end
 				end
 			end
 		end
 	else
 		EspFruitCB = false
+		EspFruitsCheckBox.Text = ""
 	end
 end)
 
 -- Setups Control
+
+MainSetupTeleport.MouseButton1Click:Connect(function()
+	SetSetup("SetupTeleport")
+end)
 
 MainSetupVelocityControl.MouseButton1Click:Connect(function()
 	SetSetup("SetupVelocityControl")
