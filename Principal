@@ -448,8 +448,8 @@ EspFruitsCheckBox.MouseButton1Click:Connect(function()
 						
 						local VASASDADADA = v:GetDescendants()
 						for assa = 1, #VASASDADADA do
-							if v[assa]:IsA("Part") or v[assa]:IsA("MeshPart") then
-								ControlTextMettersAway(BillboardGuiText, v.Name, v[assa],BillboardGui)
+							if VASASDADADA[assa]:IsA("Part") or VASASDADADA[assa]:IsA("MeshPart") then
+								ControlTextMettersAway(BillboardGuiText, VASASDADADA.Name, VASASDADADA[assa],BillboardGui)
 							end
 						end
 					end
@@ -491,8 +491,8 @@ TpNearestFruit.MouseButton1Click:Connect(function()
 				else
 					local VASASDADADA = v:GetDescendants()
 					for assa = 1, #VASASDADADA do
-						if v[assa]:IsA("Part") or v[assa]:IsA("MeshPart") then
-							TpLocationOfMap(v[assa].Position)
+						if VASASDADADA[assa]:IsA("Part") or VASASDADADA[assa]:IsA("MeshPart") then
+							TpLocationOfMap(VASASDADADA[assa].Position)
 						end
 					end
 				end
