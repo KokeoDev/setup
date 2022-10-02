@@ -413,7 +413,7 @@ EspFruitsCheckBox.MouseButton1Click:Connect(function()
 		local GetAllGameThings = game.Workspace:GetDescendants()
 		
 		for i, v in pairs(GetAllGameThings) do
-			if v:IsA("Tool") or v.Name == "Fruit" then
+			if v:IsA("Tool") or v.Name == "Fruit" or v.Name == "Fruit " then
 				if v.Parent:FindFirstChildOfClass("Humanoid") then
 					-- Nothing
 				else
@@ -482,14 +482,14 @@ TpNearestFruit.MouseButton1Click:Connect(function()
 	local GetAllGameThings = game.Workspace:GetDescendants()
 
 	for i, v in pairs(GetAllGameThings) do
-		if v:IsA("Tool") then
+		if v:IsA("Tool") or v.Name == "Fruit" or v.Name == "Fruit " then
 			if v.Parent:FindFirstChildOfClass("Humanoid") then
 				-- Nothing
 			else
 				if v.Name == "Banana" or v.Name == "Apple" or v.Name == "Pineapple" then
 					-- Nothing
 				else
-					local VASASDADADA = v:GetDescendants()
+					local VASASDADADA = v:GetChildren()
 					for assa = 1, #VASASDADADA do
 						if VASASDADADA[assa]:IsA("Part") or VASASDADADA[assa]:IsA("MeshPart") or VASASDADADA[assa].Name == "Handle" then
 							print(v.Name)
