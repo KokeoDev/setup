@@ -493,7 +493,7 @@ TpNearestFruit.MouseButton1Click:Connect(function()
 					for assa = 1, #VASASDADADA do
 						if VASASDADADA[assa]:IsA("Part") or VASASDADADA[assa]:IsA("MeshPart") or VASASDADADA[assa].Name == "Handle" then
 							print(v.Name)
-							print(VASASDADADA.Name)
+							print(VASASDADADA[assa].Name)
 							TpLocationOfMap(VASASDADADA[assa].Position)
 						end
 					end
