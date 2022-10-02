@@ -446,7 +446,10 @@ EspFruitsCheckBox.MouseButton1Click:Connect(function()
 						UiStrokeGui.Thickness = 3
 						UiStrokeGui.Parent = BillboardGuiText
 						
-						ControlTextMettersAway(BillboardGuiText, v.Name, v.Handle or v.Fruit,BillboardGui)
+						ControlTextMettersAway(BillboardGuiText, v.Name, v:FindFirstChild("Handle"),BillboardGui)
+						if v:FindFirstChild("Fruit") then
+							ControlTextMettersAway(BillboardGuiText, v.Name, v:FindFirstChild("Fruit"),BillboardGui)
+						end
 					end
 				end
 			end
@@ -477,14 +480,18 @@ TpNearestFruit.MouseButton1Click:Connect(function()
 	local GetAllGameThings = game:GetDescendants()
 
 	for i, v in pairs(GetAllGameThings) do
-		if v:IsA("Tool") or v.Name == "Fruit" then
+		if v:IsA("Tool") then
 			if v.Parent:FindFirstChildOfClass("Humanoid") then
 				-- Nothing
 			else
 				if v.Name == "Banana" or v.Name == "Apple" or v.Name == "Pineapple" then
 					-- Nothing
 				else
-					TpLocationOfMap(v.Handle.Position or v.Fruit.Position)
+					if v.Name == "Fruit " then
+						TpLocationOfMap(v.Fruit.Position)	
+					else
+						TpLocationOfMap(v.Handle.Position)	
+					end
 				end
 			end
 		end
